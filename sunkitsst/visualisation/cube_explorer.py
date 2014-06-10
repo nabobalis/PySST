@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Specific Case for 4D data (time,wavelength, two spatial axes)
+Specific Case for 4D data (time, wavelength, two spatial axes)
 """
 from __future__ import absolute_import
 import glob
@@ -15,7 +15,7 @@ import scipy.interpolate as interpolate
 from matplotlib import widgets
 from skimage import exposure
 
-from .imageanimator import ImageAnimator
+from .imageanimator import ImageAnimatorSST
 import sunpy.map
 import sunpy.wcs as wcs
 
@@ -179,7 +179,7 @@ class Slit:
 # Plot Class
 #==============================================================================
 
-class PlotInteractor(ImageAnimator):
+class PlotInteractor(ImageAnimatorSST):
     """
     A PlotInteractor.
     t,lambda,x,y
