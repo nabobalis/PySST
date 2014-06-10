@@ -201,16 +201,16 @@ class PlotInteractor(ImageAnimatorSST):
     def __init__(self, data, pixel_scale, savedir, **kwargs):
         all_axes = list(range(data.ndim))
         image_axes = [all_axes[i] for i in kwargs.get('image_axes', [-2,-1])]
-        slider_axes = list(range(data.ndim))
-        [slider_axes.remove(x) for x in image_axes]
+        self.slider_axes = list(range(data.ndim))
+        for x in image_axes:
+            self.slider_axes.remove(x)
 
         axis_range = [None,None,
                       [0, pixel_scale * data[0,0,:,:].shape[0]],
                       [0, pixel_scale * data[0,0,:,:].shape[1]]]
         axis_range = kwargs.pop('axis_range', axis_range)
 
-        axis_range = self._parse_axis_range(axis_range, slider_axes, data)
-
+        axis_range = self._parse_axis_range(axis_range, data)
 
         self.image_extent = list(itertools.chain.from_iterable([axis_range[i] for i in image_axes]))
         self.pixel_scale = pixel_scale
@@ -222,15 +222,15 @@ class PlotInteractor(ImageAnimatorSST):
 
         button_labels, button_func = self.create_buttons()
 
-        slider_functions = [self._updateimage]*len(slider_axes) + [self.update_im_clim]*2
-        slider_ranges = [axis_range[i] for i in slider_axes] + [np.arange(0,99.9)]*2
+        slider_functions = [self._updateimage]*len(self.slider_axes) + [self.update_im_clim]*2
+        slider_ranges = [axis_range[i] for i in self.slider_axes] + [np.arange(0,99.9)]*2
 
-        ImageAnimator.__init__(self, data, axis_range=axis_range,
-                               button_labels=button_labels,
-                               button_func=button_func,
-                               slider_functions=slider_functions,
-                               slider_ranges=slider_ranges,
-                               **kwargs)
+        ImageAnimatorSST.__init__(self, data, axis_range=axis_range,
+                                  button_labels=button_labels,
+                                  button_func=button_func,
+                                  slider_functions=slider_functions,
+                                  slider_ranges=slider_ranges,
+                                  **kwargs)
 
         self.sliders[-2]._slider.set_val(100)
         self.sliders[-1]._slider.slidermax = self.sliders[-2]._slider

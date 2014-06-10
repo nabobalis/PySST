@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
+import numpy as np
 
-from sunpy.visualization.imageanimator import ImageAnimator
 import matplotlib.pyplot as plt
 import matplotlib.widgets as widgets
 import matplotlib.animation as mplanim
 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import mpl_toolkits.axes_grid1.axes_size as Size
+
+from sunpy.visualization.imageanimator import ImageAnimator
 
 __all__ = ['ImageAnimatorSST']
 
@@ -30,9 +32,9 @@ class ImageAnimatorSST(ImageAnimator):
         #For each axis validate and translate the axis_range
         for i,d in enumerate(data.shape):
             #If [min,max] pair or None
-            if len(axis_range[i]) == 2 or axis_range[i] is None:
+            if axis_range[i] is None or len(axis_range[i]) == 2:
                 #If min==max or None
-                if axis_range[i][0] == axis_range[i][1] or axis_range[i] is None:
+                if axis_range[i] is None or axis_range[i][0] == axis_range[i][1]:
                     if i in self.slider_axes:
                         axis_range[i] = np.linspace(0,d,d)
                     else:
