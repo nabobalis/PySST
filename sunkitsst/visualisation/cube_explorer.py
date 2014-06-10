@@ -15,9 +15,9 @@ import scipy.interpolate as interpolate
 from matplotlib import widgets
 from skimage import exposure
 
-from .imageanimator import ImageAnimatorSST
 import sunpy.map
 import sunpy.wcs as wcs
+from sunpy.visualization.imageanimator import ImageAnimator
 
 
 __all__ = ['PlotInteractor']
@@ -179,7 +179,7 @@ class Slit:
 # Plot Class
 #==============================================================================
 
-class PlotInteractor(ImageAnimatorSST):
+class PlotInteractor(ImageAnimator):
     """
     A PlotInteractor.
     t,lambda,x,y
@@ -224,8 +224,8 @@ class PlotInteractor(ImageAnimatorSST):
 
         slider_functions = [self._updateimage]*len(self.slider_axes) + [self.update_im_clim]*2
         slider_ranges = [axis_range[i] for i in self.slider_axes] + [np.arange(0,99.9)]*2
-
-        ImageAnimatorSST.__init__(self, data, axis_range=axis_range,
+        
+        ImageAnimator.__init__(self, data, axis_range=axis_range,
                                   button_labels=button_labels,
                                   button_func=button_func,
                                   slider_functions=slider_functions,
