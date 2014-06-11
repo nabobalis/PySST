@@ -196,7 +196,8 @@ class PlotInteractor(ImageAnimator):
         dir to save slit files to
 
     axis_range: list or ndarray
-        [min, max] pairs for each axis
+        [min, max] pairs for each image axis and [min, max] pairs or arrays
+        of values for each slider axis.
     """
     def __init__(self, data, pixel_scale, savedir, **kwargs):
         all_axes = list(range(data.ndim))
@@ -210,7 +211,7 @@ class PlotInteractor(ImageAnimator):
                       [0, pixel_scale * data[0,0,:,:].shape[1]]]
         axis_range = kwargs.pop('axis_range', axis_range)
 
-        axis_range = self._parse_axis_range(axis_range, data)
+        axis_range = self._sanitize_axis_range(axis_range, data)
 
         self.image_extent = list(itertools.chain.from_iterable([axis_range[i] for i in image_axes]))
         self.pixel_scale = pixel_scale
