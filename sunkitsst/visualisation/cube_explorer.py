@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import scipy.ndimage as ndimage
 import scipy.interpolate as interpolate
 from matplotlib import widgets
-from skimage import exposure
+#from skimage import exposure
 
 import sunpy.map
 import sunpy.wcs as wcs
