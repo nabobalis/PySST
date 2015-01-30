@@ -1,10 +1,12 @@
 """
 """
 
-from __future__ import division
+from __future__ import absolute_import, division
+from sunkitsst.sstmap import get_header_item_group, SSTMap
+from sunkitsst.read_cubes import read_cubes
+from sunkitsst.visualisation import cube_explorer
 import numpy as np
 #from astropy import io
-import GUI.read_cubes as read_cubes
 #import statsmodels.tsa.tsatools as tsa
 #import scipy.optimize as optimize
 import matplotlib.pyplot as plt
@@ -434,7 +436,7 @@ class CubeDataAnalysis:
 
     def fft_analysis(self, signal, per):
         mean = signal.mean()
-        print 'Signal Mean', signal.mean()
+        print('Signal Mean', signal.mean())
         signal -= signal.mean()
 
         freq = fft.fftfreq(len(signal),per)
@@ -469,12 +471,12 @@ class CubeDataAnalysis:
         mxphase=phase[idx]
         mxperiod=period[idx]
 
-        print 'Max Period and Max Phase and Max Mag'
-        print mxperiod,mxphase, mxmag
+        print('Max Period and Max Phase and Max Mag')
+        print(mxperiod,mxphase, mxmag)
 
         # amplitude seismology parameter
-        print 'amplitude seismology parameter'
-        print mxmag/mean
+        print('amplitude seismology parameter')
+        print(mxmag/mean)
 
     def EMD(self):
         pass
@@ -485,17 +487,16 @@ class SlitDataAnalysis(CubeDataAnalysis):
         pass
 
 if __name__ == '__main__':
-    import copy
 #    imfile = '/data/SST/fastrbe/sstdata.icube'
 #    spfile = '/data/SST/fastrbe/sstdata.sp.icube'
 #    imfile = '/data/SST/fastrbe/sdodata.icube'
 #    spfile = '/data/SST/fastrbe/sdodata.sp.icube'
-    imfile = '/data/SST/fastrbe/crisp.6563.icube'
-    spfile = '/data/SST/fastrbe/crisp.6563.sp.icube'
+#    imfile = '/data/SST/fastrbe/crisp.6563.icube'
+#    spfile = '/data/SST/fastrbe/crisp.6563.sp.icube'
 #    imfile = '/data/SST/fastrbe/halpha.+-1032.doppler.icube'
 #    spfile = None
-#    imfile = '/data/SST/fastrbe/crispex.6302.fullstokes_aligned.icube'
-#    spfile = '/data/SST/fastrbe/crispex.6302.fullstokes_aligned.sp.icube'
+    imfile = '/data/SST/fastrbe/crispex.6302.fullstokes_aligned.icube'
+    spfile = '/data/SST/fastrbe/crispex.6302.fullstokes_aligned.sp.icube'
 #    imfile = '/data/SST/arlimb/sstdata.fcube'
 #    spfile = '/data/SST/arlimb/spsstdata.fcube'
 #    imfile = '/data/SST/arlimb/sdodata.fcube'
@@ -504,7 +505,7 @@ if __name__ == '__main__':
     per = 2.19572
     pix_arc = 0.059
     convert_area = (725 * pix_arc) ** 2
-    im_header, im_cube, sp_header, sp_cube = read_cubes.read_cubes(imfile, spfile,  memmap = True)
+    im_header, im_cube, sp_header, sp_cube = read_cubes(imfile, spfile,  memmap = True)
 
     p = CubeDataAnalysis(im_cube, pix_arc, per, savedir='/data/')
 
@@ -515,14 +516,14 @@ if __name__ == '__main__':
 #    background_box = [390,550,270,370] ##SDO Focued
 
 #
-    area, inten, lim_inten = p.intensity_limit(background_box=background_box,
-                                               bounding_box = bounding_box,
-                                               lim = 3,
-                                               wavelength=0, plot=True)
+#    area, inten, lim_inten = p.intensity_limit(background_box=background_box,
+#                                               bounding_box = bounding_box,
+#                                               lim = 3,
+#                                               wavelength=0, plot=True)
 #
-#    fft_data = p.fft_period(bounding_box = background_box,
-#                            period=[120,180,240,300,360,420,540],
-#                            wavelength=[1], plot=True, total=True, save=True)
+    fft_data = p.fft_period(bounding_box = bounding_box,
+                            period=[120,180,240,300,360,420,540],
+                            wavelength=[0], plot=True, total=True, save=True)
 
 #    wave, scales, freqs, coi, power = p.wavelet(area[274:],plot=True)
 #    W12 = p.cross_wavelet(area[274:], inten[274:], mother='morlet',plot=True)

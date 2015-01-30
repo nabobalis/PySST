@@ -1,7 +1,13 @@
 from __future__ import absolute_import, division
 import scipy.ndimage as ndimage
+from matplotlib import widgets
+import glob
+import datetime
 import scipy.interpolate as interpolate
 import numpy as np
+import matplotlib.pyplot as plt
+
+__all__ = ['Slit']
 
 #==============================================================================
 # Slit Class
@@ -11,13 +17,13 @@ class Slit:
 
     def __init__(self, image_animator):
         self.image_animator = image_animator
-        self.axes = self.base.axes
+        self.axes = self.image_animator.axes
         self.points = []
         self.mpl_points = []
         self.mpl_curve = []
         self.anns = []
-        self.res = None
-        self.curve_points = None #np.zeros([self.res,2])
+        self.res = 100
+        self.curve_points = np.zeros([self.res,2])
         self.data = []
         self.data_run = []
         self.distance = []
@@ -143,4 +149,3 @@ class Slit:
         elif sort == 'symmetric':
             self.data_run.append(slit[:-1] - slit[1:])
             return self.data_run[-1]
-

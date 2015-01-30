@@ -1,20 +1,14 @@
 from __future__ import absolute_import, division
+
+import itertools
+import numpy as np
+from matplotlib import widgets
 import glob
 import datetime
-import itertools
-
-import numpy as np
 import matplotlib.pyplot as plt
 
-from matplotlib import widgets
-from skimage import exposure
-
 from sunpy.visualization.imageanimator import ImageAnimator
-
-
-from pyinstrument import Profiler
-
-
+from sunkitsst.visualisation.slit import Slit
 __all__ = ['PlotInteractor']
 
 #==============================================================================
@@ -97,7 +91,6 @@ class PlotInteractor(ImageAnimator):
         else:
             self.im.set_clim(np.max(self.data[self.frame_slice]) * (self.sliders[-1]._slider.val / 100),
                          np.max(self.data[self.frame_slice]) * (self.sliders[-2]._slider.val / 100))
-
 #==============================================================================
 # Button Functions
 #==============================================================================
@@ -168,7 +161,7 @@ class PlotInteractor(ImageAnimator):
             self.slit.distance *= self.pixel_scale
             self.slit.data = slit
             self.plot_slits(slit)
-
+            
 #==============================================================================
 # Figure Callbacks
 #==============================================================================
@@ -180,14 +173,12 @@ class PlotInteractor(ImageAnimator):
             elif event.inaxes is self.axes and event.button == 3:
                 self.slit.remove_point()
             elif event.inaxes is self.axes and event.button == 2:
-                profiler = Profiler()
-                profiler.start()
                 self.slit.create_curve()
                 slit = np.zeros([self.nlambda,self.nt,self.slit.res])
                 for i in range(self.nlambda):
                     slit[i,:,:] = self.slit.get_slit_data(self.data[:,i,:,:],self.image_extent)
-                profiler.stop()
-                print(profiler.output_text(unicode=True, color=True))
+#                profiler.stop()
+#                print(profiler.output_text(unicode=True, color=True))
                 self.slit.distance *= self.pixel_scale
                 self.slit.data = slit
                 self.plot_slits(slit)
@@ -215,15 +206,12 @@ class PlotInteractor(ImageAnimator):
                 axes[1].imshow(rundiff[:,:].T/np.max(np.abs(rundiff[:,:].T)), origin='lower',
                                 interpolation='spline36',
                                  cmap=plt.get_cmap('Greys_r'), extent = extent,
-                                    aspect='auto')#, vmin=np.min(rundiff),
-                                    #vmax=0.8*np.max(rundiff))
+                                    aspect='auto')
                 axes[0].imshow(slit[i,:,:].T/np.max(np.abs(slit[i,:,:].T)), origin='lower',
                                     interpolation='spline36',
                                     cmap=plt.get_cmap('Greys_r'), extent = extent,
-                                    aspect='auto')#, vmin=np.min(slit[i,:,:]),
-                                    #vmax=0.8*np.max(slit[i,:,:]))
+                                    aspect='auto')
             else:
-#                loc_mean = exposure.equalize_adapthist(slit[i,:,:].T/np.max(np.abs(slit[i,:,:].T)), clip_limit=0.15, nbins=2**12)
                 loc_mean = slit[i,:,:].T/np.max(np.abs(slit[i,:,:].T))
 
                 axes[i].imshow(loc_mean[:,:], origin='lower',
