@@ -1,12 +1,9 @@
 """
 Author: Staurt Mumford
 
-A series of functions to read SST/SD0 data cubes created by some strage pipeline.
+A series of functions to read SST/SDO data cubes created by some strage pipeline.
 """
-from __future__ import print_function
-from __future__ import unicode_literals
-from __future__ import absolute_import
-from __future__ import division
+from __future__ import print_function, unicode_literals, absolute_import, division
 
 import numpy as np
 

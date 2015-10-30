@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division
+from __future__ import print_function, unicode_literals, absolute_import, division
 
 import itertools
 import numpy as np
@@ -61,7 +61,7 @@ class PlotInteractor(ImageAnimator):
 
         slider_functions = [self._updateimage]*len(self.slider_axes) + [self.update_im_clim]*2
         slider_ranges = [axis_range[i] for i in self.slider_axes] + [np.arange(0,99.9)]*2
-        
+
         ImageAnimator.__init__(self, data, axis_range=axis_range,
                                   button_labels=button_labels,
                                   button_func=button_func,
@@ -161,7 +161,7 @@ class PlotInteractor(ImageAnimator):
             self.slit.distance *= self.pixel_scale
             self.slit.data = slit
             self.plot_slits(slit)
-            
+
 #==============================================================================
 # Figure Callbacks
 #==============================================================================

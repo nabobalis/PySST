@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division
+from __future__ import print_function, unicode_literals, absolute_import, division
+
 import scipy.ndimage as ndimage
 from matplotlib import widgets
 import glob
