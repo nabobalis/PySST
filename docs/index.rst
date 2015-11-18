@@ -9,6 +9,6 @@ Welcome to Sunkit-SST's documentation!
 .. autofunction:: sunkitsst.get_SST_header
 .. autofunction:: sunkitsst.get_SST_cube
 .. autofunction:: sunkitsst.get_dtype
-.. autofunction:: sunkitsst.read_cubes
+.. autofunction:: sunkitsst.read_cube
 .. autofunction:: sunkitsst.get_header_item_group
 .. autofunction:: sunkitsst.SSTMap

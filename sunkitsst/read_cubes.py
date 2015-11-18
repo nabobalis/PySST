@@ -129,7 +129,7 @@ def get_SST_cube(afile, header, np_dtype, memmap=True):
     return data
 
 
-def read_cubes(imfile, spfile=False, memmap=True):
+def read_cube(imfile, spfile=False, memmap=True):
     """
     High level  read, takes file name returns header and data cube
 
