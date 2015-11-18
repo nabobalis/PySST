@@ -6,23 +6,9 @@
 Welcome to Sunkit-SST's documentation!
 ======================================
 
-Contents:
-
-.. toctree::
-   :maxdepth: 2
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
-.. autofunction:: get_SST_header
-.. autofunction:: get_SST_cube
-.. autofunction:: get_dtype
-.. autofunction:: read_cubes
-.. autofunction:: get_header_item_group
-.. autoclass:: SSTMap
+.. autofunction:: sunkitsst.get_SST_header
+.. autofunction:: sunkitsst.get_SST_cube
+.. autofunction:: sunkitsst.get_dtype
+.. autofunction:: sunkitsst.read_cubes
+.. autofunction:: sunkitsst.get_header_item_group
+.. autofunction:: sunkitsst.SSTMap
