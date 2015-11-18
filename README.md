@@ -20,7 +20,7 @@ Example
 ------
 
 ```python
-from sunkitsst import read_cubes
+from sunkitsst import read_cube
 
 im_file = 'path to imcube file'
 sp_file = 'path to spcube file'
