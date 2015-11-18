@@ -1,4 +1,4 @@
-Copyright (c) 2014, Nabil
+Copyright (c) 2014, Stuart Mumford
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
