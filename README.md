@@ -2,13 +2,13 @@ sunkit-sst
 ==========
 
 This is a small Python module that is designed to allow the reading of SST cube files that are created from the Swedish Solar Telescopes.
-This should also work for some IRIS datascubes, as they are also created with this method.
+This should also work for some IRIS data cubes, as they are also created with this method.
 
 Install
 -------
 
-To install, it requires numpy and sunpy to be installed.
-These are also hard dependacies of the module as well.
+To install, it requires NumPy and SunPy to be installed.
+These are also hard dependencies of the module as well.
 
 Currently, to install, you have to use the setup.py, like so:
 
@@ -17,7 +17,7 @@ sudo python setup.py install
 ```
 
 Example
-------
+-------
 
 ```python
 from sunkitsst import read_cube
