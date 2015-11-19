@@ -3,11 +3,11 @@
 REM Command file for Sphinx documentation
 
 if "%SPHINXBUILD%" == "" (
-	set SPHINXBUILD=sphinx-build
+	set SPHINXBUILD=sphinx-build2
 )
-set BUILDDIR=_build
-set ALLSPHINXOPTS=-d %BUILDDIR%/doctrees %SPHINXOPTS% .
-set I18NSPHINXOPTS=%SPHINXOPTS% .
+set BUILDDIR=build
+set ALLSPHINXOPTS=-d %BUILDDIR%/doctrees %SPHINXOPTS% source
+set I18NSPHINXOPTS=%SPHINXOPTS% source
 if NOT "%PAPER%" == "" (
 	set ALLSPHINXOPTS=-D latex_paper_size=%PAPER% %ALLSPHINXOPTS%
 	set I18NSPHINXOPTS=-D latex_paper_size=%PAPER% %I18NSPHINXOPTS%
@@ -48,7 +48,7 @@ if "%1" == "clean" (
 )
 
 
-REM Check if sphinx-build is available and fallback to Python version if any
+REM Check if sphinx-build2 is available and fallback to Python version if any
 %SPHINXBUILD% 2> nul
 if errorlevel 9009 goto sphinx_python
 goto sphinx_ok
@@ -59,9 +59,9 @@ set SPHINXBUILD=python -m sphinx.__init__
 %SPHINXBUILD% 2> nul
 if errorlevel 9009 (
 	echo.
-	echo.The 'sphinx-build' command was not found. Make sure you have Sphinx
+	echo.The 'sphinx-build2' command was not found. Make sure you have Sphinx
 	echo.installed, then set the SPHINXBUILD environment variable to point
-	echo.to the full path of the 'sphinx-build' executable. Alternatively you
+	echo.to the full path of the 'sphinx-build2' executable. Alternatively you
 	echo.may add the Sphinx directory to PATH.
 	echo.
 	echo.If you don't have Sphinx installed, grab it from

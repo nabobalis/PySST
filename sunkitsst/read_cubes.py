@@ -19,6 +19,7 @@ def get_SST_header(afile):
     afile: string
         A filepath to the a SST cube file.
 
+
     Returns
     -------
     header: dictonary
@@ -63,6 +64,7 @@ def get_dtype(header):
     header: dictonary
         The dictonary that contains the header of the SST cube file.
 
+
     Returns
     -------
     np_dtype : type
@@ -100,6 +102,7 @@ def get_SST_cube(afile, header, np_dtype, memmap=True):
     Given a SST data cube, a header dictionary and a computed numpy dtype
     returns a np array containg the whole data cube.
 
+
     Parameters
     ----------
     afile: string
@@ -110,6 +113,7 @@ def get_SST_cube(afile, header, np_dtype, memmap=True):
         The data type of the data within the SST cube file.
     memmap: Bool
         If True, will use memmap (default) in order to save your RAM.
+
 
     Returns
     -------
