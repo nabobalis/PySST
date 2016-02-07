@@ -17,6 +17,8 @@ __all__ = ['Slit']
 
 class Slit:
 
+##TODO: Move away from ndimage. I am not sure it is the best way for this.
+
     def __init__(self, image_animator):
         self.image_animator = image_animator
         self.axes = self.image_animator.axes
