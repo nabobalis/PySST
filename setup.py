@@ -6,10 +6,11 @@ from setuptools import setup
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+authors = ["Stuart Mumford", "Nabil Freij"]
 setup(
     name="sunkit-sst",
     version="1.0",
-    author="Stuart Mumford",
+    author=authors,
     description=("A package for the manipulation of SST data."),
     license="BSD",
     url="https://github.com/nabobalis/sunkit-sst",
@@ -17,8 +18,8 @@ setup(
     install_requires=['numpy', 'sunpy'],
     long_description=read('README.md'),
     classifiers=[
-        "Development Status :: 5 - Production/Stable",
-        "Topic :: Utilities",
-        "License :: OSI Approved :: BSD License",
+                 "Development Status :: 5 - Production/Stable",
+                 "Topic :: Utilities",
+                 "License :: OSI Approved :: BSD License",
                 ],
 )

@@ -1,7 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
 """
-Author: Staurt Mumford
-
 A series of functions to read SST data cubes created by the reduction pipeline.
 """
 from __future__ import (print_function, unicode_literals,

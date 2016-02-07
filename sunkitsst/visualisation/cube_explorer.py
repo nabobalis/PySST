@@ -33,6 +33,7 @@ class PlotInteractor(ImageAnimator):
     axis_range: list or ndarray
         [min, max] pairs for each image axis and [min, max] pairs or arrays
         of values for each slider axis.
+        Otherwise it just takes the shape and returns a non-physical index.
     """
     def __init__(self, data, pixel_scale, savedir, **kwargs):
         all_axes = list(range(data.ndim))
@@ -41,6 +42,9 @@ class PlotInteractor(ImageAnimator):
         for x in image_axes:
             self.slider_axes.remove(x)
 
+        if not kwargs.has_key('cmap'):
+            kwargs['cmap'] = plt.get_cmap('gray')
+            
         axis_range = [None,None,
                       [0, pixel_scale * data[0,0,:,:].shape[0]],
                       [0, pixel_scale * data[0,0,:,:].shape[1]]]
@@ -149,7 +153,7 @@ class PlotInteractor(ImageAnimator):
                 data = np.load(name).items()
                 self.slit.data = data[0][1]
                 self.slit.curve_points = data[1][1]
-#                self.slit.distance = data[2][0]
+                self.slit.distance = data[2][0]
             elif flag == 'npy':
                 self.slit.curve_points[:,0], self.slit.curve_points[:,1] = zip(*np.load(name))
             self.slit.mpl_curve.append(self.axes.plot(self.slit.curve_points[:,0], self.slit.curve_points[:,1]))
@@ -176,8 +180,6 @@ class PlotInteractor(ImageAnimator):
                 slit = np.zeros([self.nlambda,self.nt,self.slit.res])
                 for i in range(self.nlambda):
                     slit[i,:,:] = self.slit.get_slit_data(self.data[:,i,:,:],self.image_extent)
-#                profiler.stop()
-#                print(profiler.output_text(unicode=True, color=True))
                 self.slit.distance *= self.pixel_scale
                 self.slit.data = slit
                 self.plot_slits(slit)
