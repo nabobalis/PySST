@@ -94,9 +94,10 @@ class PlotInteractor(ImageAnimator):
         else:
             self.im.set_clim(np.max(self.data[self.frame_slice]) * (self.sliders[-1]._slider.val / 100),
                          np.max(self.data[self.frame_slice]) * (self.sliders[-2]._slider.val / 100))
-#==============================================================================
+
+# =============================================================================
 # Button Functions
-#==============================================================================
+# =============================================================================
 
     def delete(self, event):
         if not hasattr(self.slit, 'mpl_points'):
@@ -121,15 +122,15 @@ class PlotInteractor(ImageAnimator):
         if not hasattr(self.slit, 'mpl_points'):
             print('SAVE BEN FOGLE, SAVE THE SLIT.')
         else:
-            names = ['curve_points', 'slit_data', 'distance']
+            names = ['curve_points', 'slit_data', 'length']
             if not filename:
                 filename = str(datetime.datetime.now())
             if self.r_diff:
                 np.savez(self.savedir + filename, names + ['run_diff'],
-                         self.slit.curve_points, self.slit.data, self.slit.distance, self.slit.data_run)
+                         self.slit.curve_points, self.slit.data, self.slit.length, self.slit.data_run)
             else:
                 np.savez(self.savedir + filename, names,
-                         self.slit.curve_points, self.slit.data, self.slit.distance)
+                         self.slit.curve_points, self.slit.data, self.slit.length)
 
     def load_slit(self, event):
         files_npz = glob.glob(self.savedir + '*.npz')
@@ -153,7 +154,7 @@ class PlotInteractor(ImageAnimator):
                 data = np.load(name).items()
                 self.slit.data = data[0][1]
                 self.slit.curve_points = data[1][1]
-                self.slit.distance = data[2][0]
+                self.slit.length = data[2][0]
             elif flag == 'npy':
                 self.slit.curve_points[:,0], self.slit.curve_points[:,1] = zip(*np.load(name))
             self.slit.mpl_curve.append(self.axes.plot(self.slit.curve_points[:,0], self.slit.curve_points[:,1]))
@@ -161,13 +162,13 @@ class PlotInteractor(ImageAnimator):
             slit = np.zeros([self.nlambda,self.nt,self.slit.res])
             for i in range(self.nlambda):
                 slit[i,:,:] = self.slit.get_slit_data(self.data[:,i,:,:],self.image_extent)
-            self.slit.distance *= self.pixel_scale
+            self.slit.length *= self.pixel_scale
             self.slit.data = slit
             self.plot_slits(slit)
 
-#==============================================================================
+# =============================================================================
 # Figure Callbacks
-#==============================================================================
+# =============================================================================
 
     def get_click(self, event):
         if not event.inaxes is None:
@@ -180,7 +181,7 @@ class PlotInteractor(ImageAnimator):
                 slit = np.zeros([self.nlambda,self.nt,self.slit.res])
                 for i in range(self.nlambda):
                     slit[i,:,:] = self.slit.get_slit_data(self.data[:,i,:,:],self.image_extent)
-                self.slit.distance *= self.pixel_scale
+                self.slit.length *= self.pixel_scale
                 self.slit.data = slit
                 self.plot_slits(slit)
                 self.fig.canvas.mpl_disconnect(self.cid)
@@ -189,7 +190,7 @@ class PlotInteractor(ImageAnimator):
                 print('Click a real mouse button')
 
     def plot_slits(self, slit, r_diff=False):
-        extent = [0, self.nt, 0 , self.slit.distance]
+        extent = [0, self.nt, 0 , self.slit.length]
         self.r_diff = r_diff
 
         if r_diff:
