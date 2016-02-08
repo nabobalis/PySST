@@ -59,6 +59,7 @@ class PlotInteractor(ImageAnimator):
         self.savedir = savedir
         self.nlambda = data.shape[1]
         self.nt = data.shape[0]
+        self.interop = True
 
         button_labels, button_func = self.create_buttons()
 
@@ -113,7 +114,7 @@ class PlotInteractor(ImageAnimator):
 
     def record(self, event):
         if event.inaxes is None: return
-        self.slit = Slit(self.axes)
+        self.slit = Slit(self.axes, self.pixel_scale)
         self.slits.append(self.slit)
         self.cursor = widgets.Cursor(self.axes, useblit=False, color='red', linewidth=1)
         self.cid = self.fig.canvas.mpl_connect('button_press_event', self.get_click)
@@ -148,7 +149,7 @@ class PlotInteractor(ImageAnimator):
 
         for i in range(len(files)):
             name = files[i]
-            self.slit = Slit(self.axes)
+            self.slit = Slit(self.axes, self.pixel_scale)
             self.slits.append(self.slit)
             if flag == 'npz':
                 data = np.load(name).items()
@@ -177,7 +178,7 @@ class PlotInteractor(ImageAnimator):
             elif event.inaxes is self.axes and event.button == 3:
                 self.slit.remove_point()
             elif event.inaxes is self.axes and event.button == 2:
-                self.slit.create_curve()
+                self.slit.create_curve(self.interop)
                 slit = np.zeros([self.nlambda,self.nt,self.slit.res])
                 for i in range(self.nlambda):
                     slit[i,:,:] = self.slit.get_slit_data(self.data[:,i,:,:],self.image_extent)
