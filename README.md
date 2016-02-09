@@ -7,6 +7,8 @@ sunkit-sst
 This is a small Python module that is designed to allow the reading of SST cube files that are created from the Swedish Solar Telescopes.
 This should also work for some IRIS data cubes, as they are also created with this method.
 
+Furthermore, there is a basic matplotlib visualization tool that allows a basic flick through the data and do a slit analysis.
+
 Install
 -------
 
