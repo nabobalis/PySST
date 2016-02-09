@@ -14,7 +14,7 @@ from ._astropy_init import *
 if not _ASTROPY_SETUP_:
         from sunkitsst.read_cubes import (get_SST_header, get_SST_cube,
                                   get_dtype, read_cubes)
-        from sunkitsst.sstmap import (get_header_item_group, SSTMap)
+        from sunkitsst.visualisation import (cube_explorer, slit)
 
 __all__ = ["get_SST_header", "get_SST_cube", "get_dtype", "read_cubes",
-           "get_header_item_group", "SSTMap"]
+           "cube_explorer", "slit"]
