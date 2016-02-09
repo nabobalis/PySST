@@ -58,9 +58,8 @@ class Slit:
             self.axes.figure.canvas.draw()
 
     def create_curve(self, interop):
-#        self.curve_points = np.zeros([self.res, 2])
-        self.t = np.arange(self.points[0][0],self.points[-1][0],self.pixel_scale)#linspace(0, self.res, self.res) / self.res
-        self.res = self.t.shape[0]        
+        self.t = np.arange(self.points[0][0], self.points[-1][0], self.pixel_scale)
+        self.res = self.t.shape[0]
         if len(self.mpl_points) == 2:
             if interop:
                 self.curve_points = self.interpol(*self.points)
@@ -99,20 +98,20 @@ class Slit:
 
     def cubic_bezier(self, P0, P1, P2, P3):
         ans = np.zeros([self.res, 2])
-        ans[:, 0] = (1 - t)**3 * P0[0] + 3*(1 - t)**2 *t*P1[0] + 3*(1-t)*t**2*P2[0] + t**3*P3[0]
-        ans[:, 1] = (1 - t)**3 * P0[1] + 3*(1 - t)**2 *t*P1[1] + 3*(1-t)*t**2*P2[1] + t**3*P3[1]
+        ans[:, 0] = (1 - self.t)**3 * P0[0] + 3*(1 - self.t)**2 *self.t*P1[0] + 3*(1-self.t)*t**2*P2[0] + self.t**3*P3[0]
+        ans[:, 1] = (1 - self.t)**3 * P0[1] + 3*(1 - self.t)**2 *self.t*P1[1] + 3*(1-self.t)*t**2*P2[1] + self.t**3*P3[1]
         return ans
 
     def quad_bezier(self, P0, P1, P2):
         ans = np.zeros([self.res, 2])
-        ans[:, 0] = (1 - t)**2 * P0[0] + 2*(1 - t)*t*P1[0] + t**2*P2[0]
-        ans[:, 1] = (1 - t)**2 * P0[1] + 2*(1 - t)*t*P1[1] + t**2*P2[1]
+        ans[:, 0] = (1 - self.t)**2 * P0[0] + 2*(1 - self.t)*t*P1[0] + self.t**2*P2[0]
+        ans[:, 1] = (1 - self.t)**2 * P0[1] + 2*(1 - self.t)*t*P1[1] + self.t**2*P2[1]
         return ans
 
     def linear_bezier(self, P0, P1):
         ans = np.zeros([self.res, 2])
-        ans[:, 0] = (1 - t) * P0[0] + t*P1[0]
-        ans[:, 1] = (1 - t) * P0[1] + t*P1[1]
+        ans[:, 0] = (1 - self.t) * P0[0] + t*P1[0]
+        ans[:, 1] = (1 - self.t) * P0[1] + t*P1[1]
         return ans
 
     def get_slit_data(self, data, extent, order=0, mode="nearest"):
