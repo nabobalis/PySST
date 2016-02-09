@@ -1,6 +1,9 @@
 sunkit-sst
 ==========
 
+[![Coverage Status](https://coveralls.io/repos/github/nabobalis/sunkit-sst/badge.svg?branch=master)](https://coveralls.io/github/nabobalis/sunkit-sst?branch=master)
+[![Documentation Status](https://readthedocs.org/projects/sunkit-sst/badge/?version=latest)](http://sunkit-sst.readthedocs.org/?badge=latest)
+
 This is a small Python module that is designed to allow the reading of SST cube files that are created from the Swedish Solar Telescopes.
 This should also work for some IRIS data cubes, as they are also created with this method.
 
