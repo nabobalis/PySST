@@ -130,7 +130,7 @@ class Slit:
         elif len(data.shape) == 3:
             slit = np.zeros([data.shape[0], self.res])
             for i in range(0, data.shape[0]):
-                slit[i, :] = ndimage.interpolation.map_coordinates(data[i, :, :], [y_pixel, x_pixel], order=order)
+                slit[i, :] = ndimage.interpolation.map_coordinates(data[i, :, :], [y_pixel, x_pixel], order=order,mode=mode)
         else:
             raise Exception
         return slit
