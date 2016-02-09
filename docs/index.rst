@@ -38,10 +38,4 @@ API
 
 Below are the functions included within this Python module.
 
-.. autofunction:: sunkitsst.get_SST_header
-.. autofunction:: sunkitsst.get_SST_cube
-.. autofunction:: sunkitsst.get_dtype
-.. autofunction:: sunkitsst.read_cubes
-.. autofunction:: sunkitsst.PlotInteractor
-.. autofunction:: sunkitsst.Slit
-
+.. automodapi:: sunkitsst
