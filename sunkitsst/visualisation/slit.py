@@ -13,7 +13,9 @@ __all__ = ['Slit']
 
 
 class Slit:
-
+    """
+    Doc to come.
+    """
     def __init__(self, image_animator, pixel_scale):
         self.image_animator = image_animator
         self.pixel_scale = pixel_scale
