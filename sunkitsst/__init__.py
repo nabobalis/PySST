@@ -14,7 +14,8 @@ from ._astropy_init import *
 if not _ASTROPY_SETUP_:
         from sunkitsst.read_cubes import (get_SST_header, get_SST_cube,
                                   get_dtype, read_cubes)
-        from sunkitsst.visualisation import (cube_explorer, slit)
+        from sunkitsst.visualisation.cube_explorer import PlotInteractor
+        from sunkitsst.visualisation.slit import Slit
 
 __all__ = ["get_SST_header", "get_SST_cube", "get_dtype", "read_cubes",
-           "cube_explorer", "slit"]
+           "PlotInteractor", "Slit"]

@@ -42,6 +42,6 @@ Below are the functions included within this Python module.
 .. autofunction:: sunkitsst.get_SST_cube
 .. autofunction:: sunkitsst.get_dtype
 .. autofunction:: sunkitsst.read_cubes
-.. autofunction:: sunkitsst.cube_explorer
-.. autofunction:: sunkitsst.slit
+.. autofunction:: sunkitsst.PlotInteractor
+.. autofunction:: sunkitsst.Slit
 
