@@ -1,5 +1,10 @@
 language: python
 
+channels:
+    - astropy
+    - sunpy
+    - jevans
+
 python:
     - 2.7
     - 3.4
