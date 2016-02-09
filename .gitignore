@@ -1,54 +1,52 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
+# Compiled files
 *.py[cod]
-
-# C extensions
+*.a
+*.o
 *.so
+__pycache__
 
-# Distribution / packaging
-.Python
-env/
-bin/
-build/
-develop-eggs/
-dist/
-eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
+# Ignore .c files by default to avoid including generated code. If you want to
+# add a non-generated .c extension, use `git add -f filename.c`.
+*.c
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
+# Other generated files
+*/version.py
+*/cython_version.py
+htmlcov
 .coverage
-.cache
-nosetests.xml
-coverage.xml
+MANIFEST
 
-# Translations
-*.mo
+# Sphinx
+docs/api
+docs/_build
 
-# Mr Developer
-.mr.developer.cfg
+# Eclipse editor project files
 .project
 .pydevproject
+.settings
 
-# Rope
-.ropeproject
+# Pycharm editor project files
+.idea
 
-# Django stuff:
-*.log
-*.pot
+# Packages/installer info
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+distribute-*.tar.gz
 
-# Sphinx documentation
-docs/_build/
+# Other
+.cache
+.tox
+.*.sw[op]
+*~
 
+# Mac OSX
+.DS_Store
