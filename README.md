@@ -1,6 +1,7 @@
 sunkit-sst
 ==========
 
+[![Build Status](https://travis-ci.org/nabobalis/sunkit-sst.svg?branch=master)](https://travis-ci.org/nabobalis/sunkit-sst)
 [![Coverage Status](https://coveralls.io/repos/github/nabobalis/sunkit-sst/badge.svg?branch=master)](https://coveralls.io/github/nabobalis/sunkit-sst?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/sunkit-sst/badge/?version=latest)](http://sunkit-sst.readthedocs.org/?badge=latest)
 
