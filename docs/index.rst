@@ -1,11 +1,11 @@
 Welcome to Sunkit-SST's documentation!
 ======================================
 
-This is a small Python module that is designed to allow the reading of SST cube files that are created from the Swedish Solar Telescopes.
-This should also work for some IRIS data cubes, as they are also created with this method.
+This is a small Python module that allows the reading of icube and spcube files that are created by the reduction pipeline from the Swedish Solar Telescope (SST).
 
-Furthermore, there is a visualisation module that uses matplotlib to create a GUI.
-From this, it is possible to flick through the data as well as do a slit analysis.
+Furthermore, there is a basic visualisation module that uses Matplotlib to create a GUI. From this, it is possible to browse through the data and do a slit analysis. It is not intended to be a replacement for `CRISPEX <http://folk.uio.no/gregal/crispex/>`_.
+
+**Please note that this was created for SST cubes created in 2012 and has not been tested on cubes created from the current SST reduction pipeline.**
 
 Install
 -------

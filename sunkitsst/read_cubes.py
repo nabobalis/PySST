@@ -17,7 +17,6 @@ def get_SST_header(afile):
     afile: string
         A filepath to the a SST cube file.
 
-
     Returns
     -------
     header: dictonary
