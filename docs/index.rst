@@ -33,6 +33,36 @@ This is the most basic example possible with this code.
 
   im_header, im_cube, sp_header, sp_cube = read_cubes(im_file, sp_file)
 
+File Format
+-----------
+
+The file format for these SST cubes is as follows. Note that this is gleamed from the header and having reverse enginered the file format.
+
+Each file has a header that is 512 bytes long and then the rest is binary data.
+
+Header
+######
+
+icube header: 
+
+- nx
+- stokes
+- endian
+- dims
+- datatype
+- ns
+- nt 
+- ny
+
+spcube header:
+
+- nx
+- dims
+- ny
+- datatype
+- endian
+- nt
+
 API
 ---
 
