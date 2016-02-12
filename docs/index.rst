@@ -1,9 +1,17 @@
 Welcome to Sunkit-SST's documentation!
 ======================================
-
 This is a small Python module that allows the reading of icube and spcube files that are created by the reduction pipeline from the Swedish Solar Telescope (SST).
 
-Furthermore, there is a basic visualisation module that uses Matplotlib to create a GUI. From this, it is possible to browse through the data and do a slit analysis. It is not intended to be a replacement for `CRISPEX <http://folk.uio.no/gregal/crispex/>`_.
+Furthermore, there is a basic visualisation module that uses Matplotlib to create a GUI.
+From this, it is possible to browse through the data and do a slit analysis.
+It is not intended to be a replacement for `CRISPEX <http://folk.uio.no/gregal/crispex/>`_.
+More information on this GUI can be found in the GUI section as well as how a cube file is strucutred and the header variables.
+
+.. toctree::
+   :maxdepth: 2
+
+   format
+   gui
 
 **Please note that this was created for SST cubes created in 2012 and has not been tested on cubes created from the current SST reduction pipeline.**
 
@@ -32,36 +40,6 @@ This is the most basic example possible with this code.
   sp_file = 'path to spcube file'
 
   im_header, im_cube, sp_header, sp_cube = read_cubes(im_file, sp_file)
-
-File Format
------------
-
-The file format for these SST cubes is as follows. Note that this is gleamed from the header and having reverse enginered the file format.
-
-Each file has a header that is 512 bytes long and then the rest is binary data.
-
-Header
-######
-
-icube header: 
-
-- nx
-- stokes
-- endian
-- dims
-- datatype
-- ns
-- nt 
-- ny
-
-spcube header:
-
-- nx
-- dims
-- ny
-- datatype
-- endian
-- nt
 
 API
 ---
