@@ -116,12 +116,16 @@ class Slit(object):
         ans[:, 1] = (1 - self.t) * P0[1] + t*P1[1]
         return ans
 
-    def get_slit_data(self, data, extent, order=0, mode="nearest"):
+    def get_slit_data(self, data, extent=[], order=0, mode="nearest"):
         if not hasattr(self, 'curve_points'):
             print('You have not yet generated a curve.')
 
-        x_pixel = (self.curve_points[:, 0] - extent[2] )/ ((extent[3] - extent[2]) / data.shape[2])
-        y_pixel = (self.curve_points[:, 1] - extent[0] )/ ((extent[1] - extent[0]) / data.shape[2])
+        if extent:
+            x_pixel = (self.curve_points[:, 0] - extent[2] )/ ((extent[3] - extent[2]) / data.shape[2])
+            y_pixel = (self.curve_points[:, 1] - extent[0] )/ ((extent[1] - extent[0]) / data.shape[2])
+        else:
+            x_pixel = self.curve_points[:, 0]
+            y_pixel = self.curve_points[:, 1]
 
         dist_x = (x_pixel[:-1] - x_pixel[1:]) ** 2
         dist_y = (y_pixel[:-1] - y_pixel[1:]) ** 2
