@@ -35,7 +35,7 @@ class PlotInteractor(ImageAnimator):
         of values for each slider axis.
         Otherwise it just takes the shape and returns a non-physical index.
     """
-    def __init__(self, data, pixel_scale, cadence, savedir, **kwargs):
+    def __init__(self, data, pixel_scale, cadence, interop, savedir, **kwargs):
         all_axes = list(range(data.ndim))
         image_axes = [all_axes[i] for i in kwargs.get('image_axes', [-2, -1])]
         self.slider_axes = list(range(data.ndim))
@@ -59,7 +59,7 @@ class PlotInteractor(ImageAnimator):
         self.savedir = savedir
         self.nt = data.shape[0]
         self.nlambda = data.shape[1]
-        self.interop = True
+        self.interop = interop
         self.range = range(0, data.shape[1])
         
         button_labels, button_func = self.create_buttons()
