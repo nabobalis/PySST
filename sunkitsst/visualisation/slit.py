@@ -75,12 +75,12 @@ class Slit(object):
             if interop:
                 self.curve_points = self.interpol(*self.points)
             else:
-                self.curve_points = self.quad_bezier(self.points[0], self.points[-1], self.points[1])
+                self.curve_points = self.quad_bezier(*self.points)
         elif len(self.mpl_points) == 4:
             if interop:
                 self.curve_points = self.interpol(*self.points)
             else:
-                self.curve_points = self.cubic_bezier(self.points[0], self.points[2], self.points[-1], self.points[1])
+                self.curve_points = self.cubic_bezier(*self.points)
         else:
             self.curve_points = self.interpol(*self.points)
         self.mpl_curve.append(self.axes.plot(self.curve_points[:, 0], self.curve_points[:, 1]))
