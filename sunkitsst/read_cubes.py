@@ -171,9 +171,9 @@ def read_cubes(imfile, spfile=False, memmap=True):
         sp_header = get_SST_header(sp)
         sp_np_dtype = get_dtype(sp_header)
         sp_cube = get_SST_cube(sp, sp_header, sp_np_dtype, memmap=True)
-        time = sp_header['nx']
+        time = int(sp_header['nx'])
     ##TODO: Might be better not to reshape it this way.
-    im_cube = np.reshape(im_cube, (im_header['nt'] / time, time,
+    im_cube = np.reshape(im_cube, (im_header['nt'] // time, time,
                                    im_header['ny'], im_header['nx']))
 
     return im_header, im_cube, sp_header, sp_cube
