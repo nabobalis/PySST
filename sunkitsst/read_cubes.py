@@ -195,13 +195,12 @@ def read_cubes(imfile, spfile=False, memmap=True, n_wave=None):
         sp_np_dtype = get_dtype(sp_header)
         sp_cube = get_SST_cube(sp, sp_header, sp_np_dtype, memmap=True)
         
-        if 'ns ' in im_header.keys():
-            target_shape = (im_header['ns'], sp_header['ny'], sp_header['nx'],
+        if 'ns' in im_header.keys():
+            target_shape = (4, sp_header['ny'], sp_header['nx'],
                             im_header['ny'], im_header['nx'])
         else:
             target_shape = (sp_header['ny'], sp_header['nx'],
                             im_header['ny'], im_header['nx'])
-        time = sp_header['nx']
 
     # TODO: Might be better not to reshape it this way.
     im_cube = np.reshape(im_cube, target_shape)
