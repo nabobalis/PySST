@@ -6,6 +6,10 @@ from __future__ import (print_function, unicode_literals,
                         absolute_import, division)
 
 import numpy as np
+import warnings
+
+# There are 4 STOKES IQUV
+NUM_STOKES = 4
 
 
 def get_SST_header(afile):
@@ -194,10 +198,12 @@ def read_cubes(imfile, spfile=False, memmap=True, n_wave=None):
         sp_header = get_SST_header(sp)
         sp_np_dtype = get_dtype(sp_header)
         sp_cube = get_SST_cube(sp, sp_header, sp_np_dtype, memmap=True)
-        
         if 'ns' in im_header.keys():
-            target_shape = (4, sp_header['ny'], sp_header['nx'],
+            # 4 stoke paramaters
+            target_shape = (sp_header['ny'], NUM_STOKES, sp_header['nx'],
                             im_header['ny'], im_header['nx'])
+            warnings.warn("Cube is shaped as Time, Stokes, Lambda, X, Y",
+                          UserWarning)
         else:
             target_shape = (sp_header['ny'], sp_header['nx'],
                             im_header['ny'], im_header['nx'])
