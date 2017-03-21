@@ -8,7 +8,7 @@ from __future__ import (print_function, unicode_literals,
 import numpy as np
 import warnings
 
-# There are 4 STOKES IQUV
+# Number of Stoke profiles IQUV
 NUM_STOKES = 4
 
 

@@ -17,12 +17,13 @@ __all__ = ['PlotInteractor']
 class PlotInteractor(ImageAnimator):
     """
     A PlotInteractor.
-    t,lambda,x,y
+    
+    Takes 4D (Time,Lambda,X,Y) or 5D (Time,Stokes,Lambda,X,Y) arrays
 
     Parameters
     ----------
     data: np.ndarray
-        A 4D array
+        A 4D or 5D array
 
     pixel_scale: float
         Pixel scale for spatial axes
@@ -45,28 +46,36 @@ class PlotInteractor(ImageAnimator):
         if 'cmap' not in kwargs:
             kwargs['cmap'] = plt.get_cmap('gray')
 
-        axis_range = [None, None,
+        if data.ndim == 5:
+            self.nlambda = data.shape[2]
+            self.range = range(0, data.shape[2])
+            axis_range = [None, [0, 10], None,
+                      [0, pixel_scale * data[0, 0, 0, :, :].shape[0]],
+                      [0, pixel_scale * data[0, 0, 0, :, :].shape[1]]]
+
+        else:     
+            self.nlambda = data.shape[1]
+            self.range = range(0, data.shape[1])
+            axis_range = [None, None,
                       [0, pixel_scale * data[0, 0, :, :].shape[0]],
                       [0, pixel_scale * data[0, 0, :, :].shape[1]]]
-        axis_range = kwargs.pop('axis_range', axis_range)
 
+        axis_range = kwargs.pop('axis_range', axis_range)
         axis_range = self._sanitize_axis_range(axis_range, data)
 
+        self.nt = data.shape[0]
         self.image_extent = list(itertools.chain.from_iterable([axis_range[i] for i in image_axes]))
         self.pixel_scale = pixel_scale
         self.cadence = cadence
         self.slits = []
         self.savedir = savedir
-        self.nt = data.shape[0]
-        self.nlambda = data.shape[1]
         self.interop = interop
-        self.range = range(0, data.shape[1])
         
         button_labels, button_func = self.create_buttons()
 
         slider_functions = [self._updateimage]*len(self.slider_axes) + [self.update_range]*2 + [self.update_im_clim]*2
         slider_ranges = [axis_range[i] for i in self.slider_axes] + [range(0, self.nlambda)]*2 + [np.arange(0, 99.9)]*2
-
+        
         ImageAnimator.__init__(self, data, axis_range=axis_range,
                                button_labels=button_labels,
                                button_func=button_func,
@@ -75,13 +84,13 @@ class PlotInteractor(ImageAnimator):
                                **kwargs)
 
         # Sets up the slit sliders
-        self.sliders[2]._slider.set_val(self.nlambda)
-        self.sliders[3]._slider.slidermax = self.sliders[2]._slider
-        self.sliders[2]._slider.slidermin = self.sliders[3]._slider
-        self.slider_buttons[3].set_visible(False)
-        self.slider_buttons[2].set_visible(False)
-        self.label_slider(3, "Start")
-        self.label_slider(2, "End")
+        self.sliders[-4]._slider.set_val(self.nlambda)
+        self.sliders[-3]._slider.slidermax = self.sliders[-4]._slider
+        self.sliders[-4]._slider.slidermin = self.sliders[-3]._slider
+        self.slider_buttons[-4].set_visible(False)
+        self.slider_buttons[-3].set_visible(False)
+        self.label_slider(-3, "Start")
+        self.label_slider(-4, "End")
 
         # Sets up the intensity scaling sliders
         self.sliders[-2]._slider.set_val(100)
