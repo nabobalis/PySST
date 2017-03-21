@@ -14,8 +14,8 @@ def get_SST_header(afile):
 
     Parameters
     ----------
-    afile: string
-        A filepath to the a SST cube file.
+    afile: open file instance
+        An open file instance to the SST cube file.
 
     Returns
     -------
@@ -179,11 +179,11 @@ def read_cubes(imfile, spfile=False, memmap=True, n_wave=None):
             n_l = im_header['ns'] * n_wave
             time = im_header['nt'] // n_l
             im_cube = im_cube[:, None, None, ...]
-            target_shape = (im_header['ns'], n_wave, time,
+            target_shape = (im_header['ns'], time, n_wave,
                             im_header['ny'], im_header['nx'])
         else:
             time = im_header['nt'] / n_wave
-            target_shape = (n_wave, time,
+            target_shape = (time, n_wave,
                             im_header['ny'], im_header['nx'])
             im_cube = im_cube[:, None, ...]
 
@@ -194,6 +194,13 @@ def read_cubes(imfile, spfile=False, memmap=True, n_wave=None):
         sp_header = get_SST_header(sp)
         sp_np_dtype = get_dtype(sp_header)
         sp_cube = get_SST_cube(sp, sp_header, sp_np_dtype, memmap=True)
+        
+        if 'ns ' in im_header.keys():
+            target_shape = (im_header['ns'], sp_header['ny'], sp_header['nx'],
+                            im_header['ny'], im_header['nx'])
+        else:
+            target_shape = (sp_header['ny'], sp_header['nx'],
+                            im_header['ny'], im_header['nx'])
         time = sp_header['nx']
 
     # TODO: Might be better not to reshape it this way.
