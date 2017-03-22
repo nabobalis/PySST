@@ -49,7 +49,7 @@ class PlotInteractor(ImageAnimator):
         if data.ndim == 5:
             self.nlambda = data.shape[2]
             self.range = range(0, data.shape[2])
-            axis_range = [None, [0, 10], None,
+            axis_range = [None, [0, 8], None,
                       [0, pixel_scale * data[0, 0, 0, :, :].shape[0]],
                       [0, pixel_scale * data[0, 0, 0, :, :].shape[1]]]
 
@@ -102,6 +102,15 @@ class PlotInteractor(ImageAnimator):
         self.label_slider(-1, "Min")
         self.label_slider(-2, "Max")
 
+        # Sets up the spatial and/or Stokes sliders
+        if data.ndim == 5:
+            self.label_slider(0, "Time")
+            self.label_slider(1, "Stokes")
+            self.label_slider(2, "Wavelength")
+        else:
+            self.label_slider(0, "Time")
+            self.label_slider(1, "Wavelength")
+                    
     def create_buttons(self):
         button_labels = ['Slit', 'Delete', 'Save', 'Load']
         button_func = [self.record, self.delete, self.save_slit, self.load_slit]
