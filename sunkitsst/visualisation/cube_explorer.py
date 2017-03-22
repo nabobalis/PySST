@@ -53,7 +53,7 @@ class PlotInteractor(ImageAnimator):
                       [0, pixel_scale * data[0, 0, 0, :, :].shape[0]],
                       [0, pixel_scale * data[0, 0, 0, :, :].shape[1]]]
 
-        else:     
+        else:
             self.nlambda = data.shape[1]
             self.range = range(0, data.shape[1])
             axis_range = [None, None,
@@ -110,7 +110,7 @@ class PlotInteractor(ImageAnimator):
         else:
             self.label_slider(0, "Time")
             self.label_slider(1, "Wavelength")
-                    
+
     def create_buttons(self):
         button_labels = ['Slit', 'Delete', 'Save', 'Load']
         button_func = [self.record, self.delete, self.save_slit, self.load_slit]
