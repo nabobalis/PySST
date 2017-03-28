@@ -73,7 +73,7 @@ class PlotInteractor(ImageAnimator):
         
         button_labels, button_func = self.create_buttons()
 
-        slider_functions = [self._updateimage]*len(self.slider_axes) + [self.update_range]*2 + [self.update_im_clim]*2
+        slider_functions = [self.update_plot]*len(self.slider_axes) + [self.update_range]*2 + [self.update_im_clim]*2
         slider_ranges = [axis_range[i] for i in self.slider_axes] + [range(0, self.nlambda)]*2 + [np.arange(0, 99.9)]*2
         
         ImageAnimator.__init__(self, data, axis_range=axis_range,
