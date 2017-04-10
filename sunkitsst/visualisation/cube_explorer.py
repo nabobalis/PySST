@@ -1,5 +1,4 @@
-from __future__ import (print_function, unicode_literals,
-                        absolute_import, division)
+from __future__ import (print_function, unicode_literals, absolute_import, division)
 
 import itertools
 import glob
@@ -36,6 +35,7 @@ class PlotInteractor(ImageAnimator):
         of values for each slider axis.
         Otherwise it just takes the shape and returns a non-physical index.
     """
+
     def __init__(self, data, pixel_scale, cadence, interop, savedir, **kwargs):
         all_axes = list(range(data.ndim))
         image_axes = [all_axes[i] for i in kwargs.get('image_axes', [-2, -1])]
@@ -49,16 +49,18 @@ class PlotInteractor(ImageAnimator):
         if data.ndim == 5:
             self.nlambda = data.shape[2]
             self.range = range(0, data.shape[2])
-            axis_range = [None, [0, 8], None,
-                      [0, pixel_scale * data[0, 0, 0, :, :].shape[0]],
-                      [0, pixel_scale * data[0, 0, 0, :, :].shape[1]]]
+            axis_range = [
+                None, [0, 8], None, [0, pixel_scale * data[0, 0, 0, :, :].shape[0]],
+                [0, pixel_scale * data[0, 0, 0, :, :].shape[1]]
+            ]
 
         else:
             self.nlambda = data.shape[1]
             self.range = range(0, data.shape[1])
-            axis_range = [None, None,
-                      [0, pixel_scale * data[0, 0, :, :].shape[0]],
-                      [0, pixel_scale * data[0, 0, :, :].shape[1]]]
+            axis_range = [
+                None, None, [0, pixel_scale * data[0, 0, :, :].shape[0]],
+                [0, pixel_scale * data[0, 0, :, :].shape[1]]
+            ]
 
         axis_range = kwargs.pop('axis_range', axis_range)
         axis_range = self._sanitize_axis_range(axis_range, data)
@@ -70,18 +72,23 @@ class PlotInteractor(ImageAnimator):
         self.slits = []
         self.savedir = savedir
         self.interop = interop
-        
+
         button_labels, button_func = self.create_buttons()
 
-        slider_functions = [self.update_plot]*len(self.slider_axes) + [self.update_range]*2 + [self.update_im_clim]*2
-        slider_ranges = [axis_range[i] for i in self.slider_axes] + [range(0, self.nlambda)]*2 + [np.arange(0, 99.9)]*2
-        
-        ImageAnimator.__init__(self, data, axis_range=axis_range,
-                               button_labels=button_labels,
-                               button_func=button_func,
-                               slider_functions=slider_functions,
-                               slider_ranges=slider_ranges,
-                               **kwargs)
+        slider_functions = [self.update_plot] * len(
+            self.slider_axes) + [self.update_range] * 2 + [self.update_im_clim] * 2
+        slider_ranges = [axis_range[i] for i in self.slider_axes
+                         ] + [range(0, self.nlambda)] * 2 + [np.arange(0, 99.9)] * 2
+
+        ImageAnimator.__init__(
+            self,
+            data,
+            axis_range=axis_range,
+            button_labels=button_labels,
+            button_func=button_func,
+            slider_functions=slider_functions,
+            slider_ranges=slider_ranges,
+            **kwargs)
 
         # Sets up the slit sliders
         self.sliders[-4]._slider.set_val(self.nlambda)
@@ -119,16 +126,19 @@ class PlotInteractor(ImageAnimator):
 
     def update_im_clim(self, val, im, slider):
         if np.mean(self.data[self.frame_slice]) < 0:
-            self.im.set_clim(np.min(self.data[self.frame_slice]) * (self.sliders[-1]._slider.val / 100),
-                             np.max(self.data[self.frame_slice]) * (self.sliders[-2]._slider.val / 100))
+            self.im.set_clim(
+                np.min(self.data[self.frame_slice]) * (self.sliders[-1]._slider.val / 100),
+                np.max(self.data[self.frame_slice]) * (self.sliders[-2]._slider.val / 100))
         else:
-            self.im.set_clim(np.max(self.data[self.frame_slice]) * (self.sliders[-1]._slider.val / 100),
-                             np.max(self.data[self.frame_slice]) * (self.sliders[-2]._slider.val / 100))
+            self.im.set_clim(
+                np.max(self.data[self.frame_slice]) * (self.sliders[-1]._slider.val / 100),
+                np.max(self.data[self.frame_slice]) * (self.sliders[-2]._slider.val / 100))
 
     def update_range(self, val, im, slider):
-        self.range = np.arange(int(self.sliders[3]._slider.val),int(self.sliders[2]._slider.val))
+        self.range = np.arange(int(self.sliders[3]._slider.val), int(self.sliders[2]._slider.val))
         if len(self.range) == 0:
-            self.range = np.arange(int(self.sliders[3]._slider.val)-1,int(self.sliders[2]._slider.val)+1,1)
+            self.range = np.arange(
+                int(self.sliders[3]._slider.val) - 1, int(self.sliders[2]._slider.val) + 1, 1)
 
 # =============================================================================
 # Button Functions
@@ -161,7 +171,8 @@ class PlotInteractor(ImageAnimator):
             names = ['curve_points', 'slit_data', 'length']
             if not filename:
                 filename = str(datetime.datetime.now())
-                np.savez(self.savedir + filename, names, self.slit.curve_points, self.slit.data, self.slit.length)
+                np.savez(self.savedir + filename, names, self.slit.curve_points, self.slit.data,
+                         self.slit.length)
 
     def load_slit(self, event):
         files = glob.glob(self.savedir + '*.npz')
@@ -178,12 +189,14 @@ class PlotInteractor(ImageAnimator):
             self.slit.data = data[0][1]
             self.slit.curve_points = data[1][1]
             self.slit.length = data[2][0]
-            self.slit.mpl_curve.append(self.axes.plot(self.slit.curve_points[:, 0], self.slit.curve_points[:, 1]))
+            self.slit.mpl_curve.append(
+                self.axes.plot(self.slit.curve_points[:, 0], self.slit.curve_points[:, 1]))
             self.axes.figure.canvas.draw()
             slit = np.zeros([len(self.range), self.nt, self.slit.res])
             for i, idx in enumerate(self.range):
-                slit[i, :, :] = self.slit.get_slit_data(self.data[:, idx, :, :], self.image_extent)                
-            slit = self.slit.get_slit_data(self.data[:, self.sliders[1]._slider.cval, :, :], self.image_extent)
+                slit[i, :, :] = self.slit.get_slit_data(self.data[:, idx, :, :], self.image_extent)
+            slit = self.slit.get_slit_data(self.data[:, self.sliders[1]._slider.cval, :, :],
+                                           self.image_extent)
             self.slit.length *= self.pixel_scale
             self.slit.data = slit
             self.plot_slits(slit)
@@ -202,7 +215,8 @@ class PlotInteractor(ImageAnimator):
                 self.slit.create_curve(self.interop)
                 slit = np.zeros([len(self.range), self.nt, self.slit.res])
                 for i, idx in enumerate(self.range):
-                    slit[i, :, :] = self.slit.get_slit_data(self.data[:, idx, :, :], self.image_extent)
+                    slit[i, :, :] = self.slit.get_slit_data(self.data[:, idx, :, :],
+                                                            self.image_extent)
                 self.slit.length *= self.pixel_scale
                 self.slit.data = slit
                 self.plot_slits(slit)
@@ -212,16 +226,21 @@ class PlotInteractor(ImageAnimator):
                 print('Click a real mouse button')
 
     def plot_slits(self, slit):
-        extent = [0, self.nt*self.cadence, 0, self.slit.length]
-        fig, axes = plt.subplots(nrows=slit.shape[0], ncols=1,
-                                 sharex=True, sharey=True, figsize=(10, 18))
+        extent = [0, self.nt * self.cadence, 0, self.slit.length]
+        fig, axes = plt.subplots(
+            nrows=slit.shape[0], ncols=1, sharex=True, sharey=True, figsize=(10, 18))
         if slit.shape[0] == 1:
             axes = [axes]
 
         for i in range(slit.shape[0]):
-            loc_mean = slit[i, :, :].T/np.max(np.abs(slit[i, :, :].T))
-            axes[i].imshow(loc_mean[:, :], origin='lower', interpolation='nearest',
-                           cmap=plt.get_cmap('Greys_r'), extent=extent, aspect='auto')
+            loc_mean = slit[i, :, :].T / np.max(np.abs(slit[i, :, :].T))
+            axes[i].imshow(
+                loc_mean[:, :],
+                origin='lower',
+                interpolation='nearest',
+                cmap=plt.get_cmap('Greys_r'),
+                extent=extent,
+                aspect='auto')
             axes[i].set_xlim(0, extent[1])
             axes[i].set_ylim(0, extent[3])
         plt.xlabel('Time (seconds)')

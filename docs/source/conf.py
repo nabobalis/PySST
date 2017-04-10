@@ -43,7 +43,6 @@ np.seterr(invalid='ignore')
 
 # -- General configuration ----------------------------------------------------
 
-
 # Load all of the global Astropy configuration
 from astropy_helpers.sphinx.conf import *
 
@@ -116,21 +115,17 @@ html_title = '{0} v{1}'.format(project, release)
 # Output file base name for HTML help builder.
 htmlhelp_basename = project + 'doc'
 
-
 # -- Options for LaTeX output -------------------------------------------------
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
-latex_documents = [('index', project + '.tex', project + u' Documentation',
-                    author, 'manual')]
-
+latex_documents = [('index', project + '.tex', project + u' Documentation', author, 'manual')]
 
 # -- Options for manual page output -------------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [('index', project.lower(), project + u' Documentation',
-              [author], 1)]
+man_pages = [('index', project.lower(), project + u' Documentation', [author], 1)]
 
 # -- Swap to Napoleon ---------------------------------------------------------
 
@@ -142,11 +137,8 @@ napoleon_use_rtype = False
 # Disable google style docstrings
 napoleon_google_docstring = False
 
-
 # -- Options for the edit_on_github extension ---------------------------------
-extensions += ['astropy_helpers.sphinx.ext.edit_on_github',
-               'sphinx.ext.doctest']
-
+extensions += ['astropy_helpers.sphinx.ext.edit_on_github', 'sphinx.ext.doctest']
 
 # Don't import the module as "version" or it will override the
 # "version" configuration parameter

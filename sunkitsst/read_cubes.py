@@ -2,8 +2,7 @@
 """
 A series of functions to read SST data cubes created by the reduction pipeline.
 """
-from __future__ import (print_function, unicode_literals,
-                        absolute_import, division)
+from __future__ import (print_function, unicode_literals, absolute_import, division)
 
 import numpy as np
 import warnings
@@ -125,9 +124,13 @@ def get_SST_cube(afile, header, np_dtype, memmap=True):
         This is data array for that SST cube file.
     """
     if memmap:
-        data = np.memmap(afile, dtype=np_dtype, mode='r', order='C',
-                         offset=512, shape=(header['nt'], header['ny'],
-                                            header['nx']))
+        data = np.memmap(
+            afile,
+            dtype=np_dtype,
+            mode='r',
+            order='C',
+            offset=512,
+            shape=(header['nt'], header['ny'], header['nx']))
     else:
         afile.seek(512)
         count = header['ny'] * header['nx'] * header['nt']
@@ -169,7 +172,7 @@ def read_cubes(imfile, spfile=False, memmap=True, n_wave=None):
     im_np_dtype = get_dtype(im_header)
     im_cube = get_SST_cube(im, im_header, im_np_dtype, memmap=memmap)
 
-    if not(spfile):
+    if not (spfile):
         time = 1
         sp_header = False
         sp_cube = False
@@ -183,16 +186,13 @@ def read_cubes(imfile, spfile=False, memmap=True, n_wave=None):
             n_l = im_header['ns'] * n_wave
             time = im_header['nt'] // n_l
             im_cube = im_cube[:, None, None, ...]
-            target_shape = (im_header['ns'], time, n_wave,
-                            im_header['ny'], im_header['nx'])
+            target_shape = (im_header['ns'], time, n_wave, im_header['ny'], im_header['nx'])
         else:
             time = im_header['nt'] / n_wave
-            target_shape = (time, n_wave,
-                            im_header['ny'], im_header['nx'])
+            target_shape = (time, n_wave, im_header['ny'], im_header['nx'])
             im_cube = im_cube[:, None, ...]
 
-        sp_header = {'nx': 1, 'ny': im_cube.shape[0],
-                     'nt': im_cube.shape[-1]*im_cube.shape[-2]}
+        sp_header = {'nx': 1, 'ny': im_cube.shape[0], 'nt': im_cube.shape[-1] * im_cube.shape[-2]}
     else:
         sp = open(spfile, 'rb')
         sp_header = get_SST_header(sp)
@@ -200,13 +200,11 @@ def read_cubes(imfile, spfile=False, memmap=True, n_wave=None):
         sp_cube = get_SST_cube(sp, sp_header, sp_np_dtype, memmap=True)
         if 'ns' in im_header.keys():
             # 4 stoke paramaters
-            target_shape = (sp_header['ny'], NUM_STOKES, sp_header['nx'],
-                            im_header['ny'], im_header['nx'])
-            warnings.warn("Cube is shaped as Time, Stokes, Lambda, X, Y",
-                          UserWarning)
+            target_shape = (sp_header['ny'], NUM_STOKES, sp_header['nx'], im_header['ny'],
+                            im_header['nx'])
+            warnings.warn("Cube is shaped as Time, Stokes, Lambda, X, Y", UserWarning)
         else:
-            target_shape = (sp_header['ny'], sp_header['nx'],
-                            im_header['ny'], im_header['nx'])
+            target_shape = (sp_header['ny'], sp_header['nx'], im_header['ny'], im_header['nx'])
 
     # TODO: Might be better not to reshape it this way.
     im_cube = np.reshape(im_cube, target_shape)
