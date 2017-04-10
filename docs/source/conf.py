@@ -36,11 +36,6 @@ if on_rtd:
     os.environ['SUNPY_CONFIGDIR'] = '/home/docs/'
     os.environ['HOME'] = '/home/docs/'
 
-# -- Download Sample Data -----------------------------------------------------
-
-import sunpy.data
-sunpy.data.download_sample_data(overwrite=False)
-
 # -- Shut up numpy warnings from WCSAxes
 
 import numpy as np
@@ -139,7 +134,7 @@ man_pages = [('index', project.lower(), project + u' Documentation',
 
 # -- Swap to Napoleon ---------------------------------------------------------
 
-extensions.remove('astropy_helpers.sphinx.ext.numpydoc')
+#extensions.remove('astropy_helpers.sphinx.ext.numpydoc')
 extensions.append('sphinx.ext.napoleon')
 
 # Disable having a separate return type row
@@ -161,31 +156,3 @@ edit_on_github_branch = "master"
 
 edit_on_github_source_root = ""
 edit_on_github_doc_root = "docs"
-
-
-# -- Sphinx Gallery ----------------------------------------------------------
-try:
-    import sphinx_gallery
-    extensions += ['sphinx_gallery.gen_gallery']
-
-    sphinx_gallery_conf = {
-        # path to store the module using example template
-        'mod_example_dir': 'generated{}modules'.format(os.sep),
-        # execute all examples except those that start with "skip_"
-        'filename_pattern': '^((?!skip_).)*$',
-        # path to the examples scripts
-        'examples_dirs': '..{}..{}examples'.format(os.sep, os.sep),
-        'gallery_dirs': 'generated{}gallery'.format(os.sep),
-        'default_thumb_file': '..{}logo{}sunpy_icon_128x128.png'.format(os.sep, os.sep),
-        'reference_url': {
-            'sunpy': None,
-            'astropy': 'http://docs.astropy.org/en/stable/',
-            'matplotlib': 'http://matplotlib.org/',
-            'numpy': 'http://docs.scipy.org/doc/numpy/'}
-        }
-except ImportError:
-    def setup(app):
-        app.warn('The sphinx_gallery extension is not installed, so the '
-                 'gallery will not be built.  You will probably see '
-                 'additional warnings about undefined references due '
-                 'to this.')
