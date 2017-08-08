@@ -1,6 +1,7 @@
-# Base dependencies required to run SunkitSST
+# Dependencies required to build the documentation
 
-numpy
-astropy
-matplotlib
-sunpy
+-r base.txt
+
+sphinx
+git+https://github.com/sunpy/sunpy-sphinx-theme.git
+sphinx-gallery
