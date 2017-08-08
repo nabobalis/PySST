@@ -90,7 +90,7 @@ rst_epilog += """
 .. _SunPy: http://sunpy.org
 .. _`SunPy mailing list`: http://groups.google.com/group/sunpy
 .. _`SunPy dev mailing list`: http://groups.google.com/group/sunpy-dev
-""".format(sunpy)
+""".format(sunkitsst)
 
 # -- Project information ------------------------------------------------------
 
