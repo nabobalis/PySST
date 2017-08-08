@@ -30,7 +30,7 @@ env:
         - SETUP_CMD='test'
         - PIP_DEPENDENCIES='git+https://github.com/sunpy/sunpy-sphinx-theme.git'
         - CONDA_CHANNELS='conda-forge'
-        - CONDA_DEPENDENCIES='sunpy'
+        - CONDA_DEPENDENCIES='sunpy sphinx_gallery'
         - EVENT_TYPE='pull_request push'
 
     matrix:
