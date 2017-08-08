@@ -66,16 +66,6 @@ if not RELEASE:
 # modify distutils' behavior.
 cmdclassd = register_commands(PACKAGENAME, VERSION, RELEASE)
 
-try:
-    from sunpy.tests.setup_command import SunPyTest
-    # Overwrite the Astropy Testing framework
-    cmdclassd['test'] = type('SunPyTest', (SunPyTest,),
-                            {'package_name': 'sunpy'})
-
-except Exception:
-    # Catch everything, if it doesn't work, we still want SunPy to install.
-    pass
-
 # Freeze build information in version.py
 generate_version_py(PACKAGENAME, VERSION, RELEASE,
                     get_debug_option(PACKAGENAME))

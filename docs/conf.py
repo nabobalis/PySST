@@ -103,7 +103,7 @@ copyright = u'{}, {}'.format(datetime.datetime.now().year, author)
 # built documents.
 
 # The short X.Y version.
-version = sunpy.__version__.split('-', 1)[0]
+version = sunkitsst.__version__.split('-', 1)[0]
 # The full version, including alpha/beta/rc tags.
 release = sunkitsst.__version__
 
@@ -172,7 +172,7 @@ extensions += ['astropy_helpers.sphinx.ext.edit_on_github', 'sphinx.ext.doctest'
 
 # Don't import the module as "version" or it will override the
 # "version" configuration parameter
-from sunpy import version as versionmod
+from sunkitsst import version as versionmod
 edit_on_github_project = "sunpy/sunkit-sst"
 if versionmod.release:
     edit_on_github_branch = "v{0}.{1}.x".format(versionmod.major, versionmod.minor)
