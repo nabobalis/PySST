@@ -58,7 +58,6 @@ matrix:
 install:
     - git clone git://github.com/astropy/ci-helpers.git
     - source ci-helpers/travis/setup_conda.sh
-    - source continuous-integration/travis/openjpeg.sh  # so glymur knows where to look
 
 script:
     - $MAIN_CMD $SETUP_CMD
