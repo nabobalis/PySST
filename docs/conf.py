@@ -50,17 +50,7 @@ except ImportError:
 
     # Load all of the global Astropy configuration
 from astropy_helpers.sphinx.conf import *
-from sunpy.extern import six
-import sunpy
-
-# -- Shut up numpy warnings from WCSAxes
-
-import numpy as np
-np.seterr(invalid='ignore')
-
-# -- Download Sample Data -----------------------------------------------------
-
-import sunpy.data.sample
+import sunkitsst
 
 # -- General configuration ----------------------------------------------------
 
@@ -96,7 +86,7 @@ templates_path.append('_templates')
 # This is added to the end of RST files - a good place to put substitutions to
 # be used globally.
 rst_epilog += """
-.. SunPy
+.. Sunkit-SST
 .. _SunPy: http://sunpy.org
 .. _`SunPy mailing list`: http://groups.google.com/group/sunpy
 .. _`SunPy dev mailing list`: http://groups.google.com/group/sunpy-dev
@@ -104,7 +94,7 @@ rst_epilog += """
 
 # -- Project information ------------------------------------------------------
 
-project = u'SunPy'
+project = u'Sunkit-SST'
 author = u'The SunPy Community'
 copyright = u'{}, {}'.format(datetime.datetime.now().year, author)
 
@@ -115,7 +105,7 @@ copyright = u'{}, {}'.format(datetime.datetime.now().year, author)
 # The short X.Y version.
 version = sunpy.__version__.split('-', 1)[0]
 # The full version, including alpha/beta/rc tags.
-release = sunpy.__version__
+release = sunkitsst.__version__
 
 try:
     from sunpy_sphinx_theme.conf import *
@@ -183,7 +173,7 @@ extensions += ['astropy_helpers.sphinx.ext.edit_on_github', 'sphinx.ext.doctest'
 # Don't import the module as "version" or it will override the
 # "version" configuration parameter
 from sunpy import version as versionmod
-edit_on_github_project = "sunpy/sunpy"
+edit_on_github_project = "sunpy/sunkit-sst"
 if versionmod.release:
     edit_on_github_branch = "v{0}.{1}.x".format(versionmod.major, versionmod.minor)
 else:
@@ -193,7 +183,7 @@ edit_on_github_doc_root = "docs"
 
 edit_on_github_skip_regex = '_.*|generated/.*'
 
-github_issues_url = 'https://github.com/sunpy/sunpy/issues/'
+github_issues_url = 'https://github.com/sunpy/sunkit-sst/issues/'
 
 # -- Options for the Sphinx gallery -------------------------------------------
 
