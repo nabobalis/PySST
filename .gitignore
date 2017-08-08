@@ -1,57 +1,73 @@
-# Compiled files
-*.py[cod]
-*.a
-*.o
-*.so
-__pycache__
-
-# Ignore .c files by default to avoid including generated code. If you want to
-# add a non-generated .c extension, use `git add -f filename.c`.
-*.c
-
-# Other generated files
-*/version.py
-*/cython_version.py
-htmlcov
-.coverage
-MANIFEST
-
-# Sphinx
-docs/api
-docs/_build
-doc/build/*
-doc/source/generated
-doc/source/api/
-doc/html
-docs
-
-# Eclipse editor project files
-.project
+.DS_Store
+.idea
 .pydevproject
 .settings
-
-# Pycharm editor project files
-.idea
-
-# Packages/installer info
-*.egg
-*.egg-info
-dist
-build
-eggs
-parts
-bin
-var
-sdist
-develop-eggs
-.installed.cfg
-distribute-*.tar.gz
-
-# Other
-.cache
-.tox
-.*.sw[op]
+.project
+*.orig
+*.pyc
+*.pyd
+*.so
+*.o
+*.def
 *~
+*.swp
+*.thumbs
+MANIFEST
+build
+dist
+sunpy.egg-info
+paver-minilib.zip
+docs/_build
+docs/generated
+docs/api/
+.tox/
+.coverage
+htmlcov
+result.xml
+sunpy/version.py
+sunpy/_compiler.c
+sunpy/cython_version.py
+sunpy/data/sample/*.fits
+sunpy/data/sample/*.csv
+sunpy/data/sample/*.fit
+.cache
+examples/figure.png
 
-# Mac OSX
+### https://raw.github.com/github/gitignore/master/Global/OSX.gitignore
+
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must ends with two \r.
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+
+### https://raw.github.com/github/gitignore/master/Global/Windows.gitignore
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# VScode
+.vscode

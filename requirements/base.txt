@@ -1,0 +1,7 @@
+# Base dependencies required to run sunkit-sst
+
+numpy
+astropy
+scipy
+sunpy
+matplotlib
