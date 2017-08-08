@@ -1,5 +1,4 @@
-from __future__ import (print_function, unicode_literals,
-                        absolute_import, division)
+from __future__ import (print_function, unicode_literals, absolute_import, division)
 
 import scipy.ndimage as ndimage
 import scipy.interpolate as interpolate
@@ -16,6 +15,7 @@ class Slit(object):
     """
     Doc to come.
     """
+
     def __init__(self, image_animator, pixel_scale):
         self.image_animator = image_animator
         self.pixel_scale = pixel_scale
@@ -31,8 +31,7 @@ class Slit(object):
     def add_point(self, x, y):
         self.points.append([x, y])
         self.mpl_points.append(self.axes.scatter(x, y))
-        self.anns.append(self.axes.annotate('{}'.format(len(self.mpl_points)),
-                                            (x + 1, y + 1)))
+        self.anns.append(self.axes.annotate('{}'.format(len(self.mpl_points)), (x + 1, y + 1)))
         self.axes.figure.canvas.draw()
 
     def remove_point(self):
@@ -60,8 +59,8 @@ class Slit(object):
             self.axes.figure.canvas.draw()
 
     def create_curve(self, interop):
-        dist_x = (self.points[-1][0] - self.points[0][0]) ** 2
-        dist_y = (self.points[-1][-1] - self.points[0][-1]) ** 2
+        dist_x = (self.points[-1][0] - self.points[0][0])**2
+        dist_y = (self.points[-1][-1] - self.points[0][-1])**2
         length = np.sum(np.sqrt(dist_x + dist_y))
         self.res = np.int(np.round(length / self.pixel_scale))
         self.t = np.linspace(0, 1, self.res)
@@ -104,20 +103,22 @@ class Slit(object):
 
     def cubic_bezier(self, P0, P1, P2, P3):
         ans = np.zeros([self.res, 2])
-        ans[:, 0] = (1 - self.t)**3 * P0[0] + 3*(1 - self.t)**2 *self.t*P1[0] + 3*(1-self.t)*self.t**2*P2[0] + self.t**3*P3[0]
-        ans[:, 1] = (1 - self.t)**3 * P0[1] + 3*(1 - self.t)**2 *self.t*P1[1] + 3*(1-self.t)*self.t**2*P2[1] + self.t**3*P3[1]
+        ans[:, 0] = (1 - self.t)**3 * P0[0] + 3 * (1 - self.t)**2 * self.t * P1[0] + 3 * (
+            1 - self.t) * self.t**2 * P2[0] + self.t**3 * P3[0]
+        ans[:, 1] = (1 - self.t)**3 * P0[1] + 3 * (1 - self.t)**2 * self.t * P1[1] + 3 * (
+            1 - self.t) * self.t**2 * P2[1] + self.t**3 * P3[1]
         return ans
 
     def quad_bezier(self, P0, P1, P2):
         ans = np.zeros([self.res, 2])
-        ans[:, 0] = (1 - self.t)**2 * P0[0] + 2*(1 - self.t)*self.t*P1[0] + self.t**2*P2[0]
-        ans[:, 1] = (1 - self.t)**2 * P0[1] + 2*(1 - self.t)*self.t*P1[1] + self.t**2*P2[1]
+        ans[:, 0] = (1 - self.t)**2 * P0[0] + 2 * (1 - self.t) * self.t * P1[0] + self.t**2 * P2[0]
+        ans[:, 1] = (1 - self.t)**2 * P0[1] + 2 * (1 - self.t) * self.t * P1[1] + self.t**2 * P2[1]
         return ans
 
     def linear_bezier(self, P0, P1):
         ans = np.zeros([self.res, 2])
-        ans[:, 0] = (1 - self.t) * P0[0] + self.t*P1[0]
-        ans[:, 1] = (1 - self.t) * P0[1] + self.t*P1[1]
+        ans[:, 0] = (1 - self.t) * P0[0] + self.t * P1[0]
+        ans[:, 1] = (1 - self.t) * P0[1] + self.t * P1[1]
         return ans
 
     def get_slit_data(self, data, extent=[], order=0, mode="nearest"):
@@ -125,22 +126,26 @@ class Slit(object):
             print('You have not yet generated a curve.')
 
         if extent:
-            x_pixel = (self.curve_points[:, 0] - extent[2] )/ ((extent[3] - extent[2]) / data.shape[2])
-            y_pixel = (self.curve_points[:, 1] - extent[0] )/ ((extent[1] - extent[0]) / data.shape[2])
+            x_pixel = (self.curve_points[:, 0] - extent[2]) / ((
+                extent[3] - extent[2]) / data.shape[2])
+            y_pixel = (self.curve_points[:, 1] - extent[0]) / ((
+                extent[1] - extent[0]) / data.shape[2])
         else:
             x_pixel = self.curve_points[:, 0]
             y_pixel = self.curve_points[:, 1]
 
-        dist_x = (x_pixel[:-1] - x_pixel[1:]) ** 2
-        dist_y = (y_pixel[:-1] - y_pixel[1:]) ** 2
+        dist_x = (x_pixel[:-1] - x_pixel[1:])**2
+        dist_y = (y_pixel[:-1] - y_pixel[1:])**2
         self.length = np.sum(np.sqrt(dist_x + dist_y))
 
         if len(data.shape) == 2:
-            slit = ndimage.interpolation.map_coordinates(data, [y_pixel, x_pixel], order=order,mode=mode)
+            slit = ndimage.interpolation.map_coordinates(
+                data, [y_pixel, x_pixel], order=order, mode=mode)
         elif len(data.shape) == 3:
             slit = np.zeros([data.shape[0], self.res])
             for i in range(0, data.shape[0]):
-                slit[i, :] = ndimage.interpolation.map_coordinates(data[i, :, :], [y_pixel, x_pixel], order=order,mode=mode)
+                slit[i, :] = ndimage.interpolation.map_coordinates(
+                    data[i, :, :], [y_pixel, x_pixel], order=order, mode=mode)
         else:
             raise Exception
         return slit
