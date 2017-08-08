@@ -1,4 +1,4 @@
-k# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
 #
 # SunPy documentation build configuration file.

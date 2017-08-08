@@ -42,7 +42,7 @@ metadata = dict(conf.items('metadata'))
 PACKAGENAME = metadata.get('package_name', 'packagename')
 DESCRIPTION = metadata.get('description', 'SunkitSST: Read and display SST data')
 AUTHOR = metadata.get('author', 'The SunPy Community')
-AUTHOR_EMAIL = metadata.get('author_email', 'nabil.freij@gmail.com')
+AUTHOR_EMAIL = metadata.get('author_email', 'sunpy@googlegroups.com')
 LICENSE = metadata.get('license', 'BSD 2-Clause')
 URL = metadata.get('url', 'http://sunpy.org')
 
@@ -53,7 +53,7 @@ LONG_DESCRIPTION = "SunkitSST is a Python library for reading and displaying Swe
 builtins._ASTROPY_PACKAGE_NAME_ = PACKAGENAME
 
 # VERSION should be PEP386 compatible (http://www.python.org/dev/peps/pep-0386)
-VERSION = '0.9.dev'
+VERSION = '0.8.dev'
 
 # Indicates if this version is a release version
 RELEASE = 'dev' not in VERSION
@@ -71,6 +71,7 @@ try:
     # Overwrite the Astropy Testing framework
     cmdclassd['test'] = type('SunPyTest', (SunPyTest,),
                             {'package_name': 'sunpy'})
+
 except Exception:
     # Catch everything, if it doesn't work, we still want SunPy to install.
     pass
@@ -104,17 +105,13 @@ for root, dirs, files in os.walk(PACKAGENAME):
                     os.path.relpath(root, PACKAGENAME), filename))
 package_info['package_data'][PACKAGENAME].extend(c_files)
 
-extras_require = {}
-
 setup(name=PACKAGENAME,
       version=VERSION,
       description=DESCRIPTION,
       scripts=scripts,
-      setup_requires=['numpy>1.7.1'],
       install_requires=['numpy>1.7.1',
-                        'astropy>=1.0.0',
+                        'astropy>=1.3',
                         'scipy',
-                        'sunpy',
                         'matplotlib>=1.1'],
       extras_require=extras_require,
       provides=[PACKAGENAME],

@@ -1,15 +1,13 @@
 name: sunkitsst-rtd
 channels:
-    - astropy
-    - sunpy
-    - jevans
+    - conda-forge
 dependencies:
-- astropy
-- beautiful-soup
-- bsddb
+- astropy >=2.0
+- beautifulsoup4
 - cairo
 - contextlib2
 - cycler
+- cython
 - db
 - decorator
 - fontconfig
@@ -39,7 +37,7 @@ dependencies:
 - pyparsing
 - pyqt
 - pytest
-- python
+- python=3.5
 - python-dateutil
 - pytz
 - qt
@@ -53,11 +51,14 @@ dependencies:
 - sqlalchemy
 - sqlite
 - suds-jurko
-- sunpy
+- sphinx=1.5.6
+- sphinx_rtd_theme
 - tk
-- wcsaxes
 - wheel
 - xz
 - zlib
-- glymur
 - openjpeg
+- sphinx-gallery
+- glymur
+- pip:
+    - git+https://github.com/sunpy/sunpy-sphinx-theme.git
