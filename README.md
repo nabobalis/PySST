@@ -18,7 +18,7 @@ These are also hard dependencies of the module as well.
 Currently, to install, you have to use the setup.py, like so:
 
 ```bash
-sudo python setup.py install
+pip install -e .
 ```
 
 Example
