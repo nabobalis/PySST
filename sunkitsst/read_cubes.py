@@ -179,17 +179,20 @@ def read_cubes(imfile, spfile=False, memmap=True, n_wave=None):
 
         # This can be relaxed later
         if not n_wave:
-            raise ValueError("Fuck this")
+            raise ValueError("Right now we need this input before hand.\
+                              This will be relaxed in a new version.")
 
         if 'ns' in im_header.keys():
             # We have stokes
             n_l = im_header['ns'] * n_wave
             time = im_header['nt'] // n_l
             im_cube = im_cube[:, None, None, ...]
-            target_shape = (im_header['ns'], time, n_wave, im_header['ny'], im_header['nx'])
+            target_shape = (np.int(im_header['ns']), np.int(time), np.int(n_wave),
+                            np.int(im_header['ny']), np.int(im_header['nx']))
         else:
             time = im_header['nt'] / n_wave
-            target_shape = (time, n_wave, im_header['ny'], im_header['nx'])
+            target_shape = (np.int(time), np.int(n_wave),
+                            np.int(im_header['ny']), np.int(im_header['nx']))
             im_cube = im_cube[:, None, ...]
 
         sp_header = {'nx': 1, 'ny': im_cube.shape[0], 'nt': im_cube.shape[-1] * im_cube.shape[-2]}
@@ -200,11 +203,13 @@ def read_cubes(imfile, spfile=False, memmap=True, n_wave=None):
         sp_cube = get_SST_cube(sp, sp_header, sp_np_dtype, memmap=True)
         if 'ns' in im_header.keys():
             # 4 stoke paramaters
-            target_shape = (sp_header['ny'], NUM_STOKES, sp_header['nx'], im_header['ny'],
-                            im_header['nx'])
+            target_shape = (np.int(sp_header['ny']), np.int(NUM_STOKES),
+                            np.int(sp_header['nx']), np.int(im_header['ny']),
+                            np.int(im_header['nx']))
             warnings.warn("Cube is shaped as Time, Stokes, Lambda, X, Y", UserWarning)
         else:
-            target_shape = (sp_header['ny'], sp_header['nx'], im_header['ny'], im_header['nx'])
+            target_shape = (np.int(sp_header['ny']), np.int(sp_header['nx']),
+                            np.int(im_header['ny']), np.int(im_header['nx']))
 
     # TODO: Might be better not to reshape it this way.
     im_cube = np.reshape(im_cube, target_shape)
