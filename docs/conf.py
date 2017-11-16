@@ -69,10 +69,7 @@ check_sphinx_version(needs_sphinx)
 
 # add any custom intersphinx for sunpy
 intersphinx_mapping.pop('h5py', None)
-intersphinx_mapping['astropy'] = ('http://docs.astropy.org/en/stable/', None)
-intersphinx_mapping['sqlalchemy'] = ('http://docs2.sqlalchemy.org/en/latest/', None)
-intersphinx_mapping['pandas'] = ('http://pandas.pydata.org/pandas-docs/stable/', None)
-intersphinx_mapping['skimage'] = ('http://scikit-image.org/docs/stable/', None)
+intersphinx_mapping['sunpy'] = ('http://docs.sunpy.org/en/stable/', None)
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
