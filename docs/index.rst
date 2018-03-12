@@ -1,4 +1,4 @@
-Welcome to Sunkit-SST's documentation!
+Welcome to PySST's documentation!
 ======================================
 This is a small Python module that allows the reading of icube and spcube files that are created by the reduction pipeline from the Swedish Solar Telescope (SST).
 
@@ -34,7 +34,7 @@ This is the most basic example possible with this code.
 
 .. code-block:: python
 
-  from sunkitsst import read_cubes
+  from pysst import read_cubes
 
   im_file = 'path to imcube file'
   sp_file = 'path to spcube file'
@@ -46,4 +46,4 @@ API
 
 Below are the functions included within this Python module.
 
-.. automodapi:: sunkitsst
+.. automodapi:: pysst

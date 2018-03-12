@@ -1,4 +1,4 @@
-name: sunkitsst-rtd
+name: pysst-rtd
 channels:
     - conda-forge
 dependencies:

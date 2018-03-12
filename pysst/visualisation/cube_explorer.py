@@ -8,7 +8,7 @@ import numpy as np
 from matplotlib import widgets
 import matplotlib.pyplot as plt
 from sunpy.visualization.imageanimator import ImageAnimator
-from sunkitsst.visualisation.slit import Slit
+from pysst.visualisation.slit import Slit
 
 __all__ = ['PlotInteractor']
 
@@ -16,7 +16,7 @@ __all__ = ['PlotInteractor']
 class PlotInteractor(ImageAnimator):
     """
     A PlotInteractor.
-    
+
     Takes 4D (Time,Lambda,X,Y) or 5D (Time,Stokes,Lambda,X,Y) arrays
 
     Parameters

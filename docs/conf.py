@@ -50,7 +50,7 @@ except ImportError:
 
     # Load all of the global Astropy configuration
 from astropy_helpers.sphinx.conf import *
-import sunkitsst
+import pysst
 
 # -- General configuration ----------------------------------------------------
 
@@ -83,15 +83,15 @@ templates_path.append('_templates')
 # This is added to the end of RST files - a good place to put substitutions to
 # be used globally.
 rst_epilog += """
-.. Sunkit-SST
+.. PySST
 .. _SunPy: http://sunpy.org
 .. _`SunPy mailing list`: http://groups.google.com/group/sunpy
 .. _`SunPy dev mailing list`: http://groups.google.com/group/sunpy-dev
-""".format(sunkitsst)
+""".format(pysst)
 
 # -- Project information ------------------------------------------------------
 
-project = u'Sunkit-SST'
+project = u'PySST'
 author = u'The SunPy Community'
 copyright = u'{}, {}'.format(datetime.datetime.now().year, author)
 
@@ -100,9 +100,9 @@ copyright = u'{}, {}'.format(datetime.datetime.now().year, author)
 # built documents.
 
 # The short X.Y version.
-version = sunkitsst.__version__.split('-', 1)[0]
+version = pysst.__version__.split('-', 1)[0]
 # The full version, including alpha/beta/rc tags.
-release = sunkitsst.__version__
+release = pysst.__version__
 
 try:
     from sunpy_sphinx_theme.conf import *
@@ -160,8 +160,8 @@ extensions += ['astropy_helpers.sphinx.ext.edit_on_github', 'sphinx.ext.doctest'
 
 # Don't import the module as "version" or it will override the
 # "version" configuration parameter
-from sunkitsst import version as versionmod
-edit_on_github_project = "sunpy/sunkit-sst"
+from pysst import version as versionmod
+edit_on_github_project = "nabobalis/pysst"
 if versionmod.release:
     edit_on_github_branch = "v{0}.{1}.x".format(versionmod.major, versionmod.minor)
 else:
@@ -171,4 +171,4 @@ edit_on_github_doc_root = "docs"
 
 edit_on_github_skip_regex = '_.*|generated/.*'
 
-github_issues_url = 'https://github.com/sunpy/sunkit-sst/issues/'
+github_issues_url = 'https://github.com/nabobalis/PySST/issues/'

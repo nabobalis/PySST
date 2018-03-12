@@ -40,13 +40,13 @@ conf.read(['setup.cfg'])
 metadata = dict(conf.items('metadata'))
 
 PACKAGENAME = metadata.get('package_name', 'packagename')
-DESCRIPTION = metadata.get('description', 'SunkitSST: Read and display SST data')
+DESCRIPTION = metadata.get('description', 'PySST: Read and display SST data')
 AUTHOR = metadata.get('author', 'The SunPy Community')
 AUTHOR_EMAIL = metadata.get('author_email', 'sunpy@googlegroups.com')
 LICENSE = metadata.get('license', 'BSD 2-Clause')
 URL = metadata.get('url', 'http://sunpy.org')
 
-LONG_DESCRIPTION = "SunkitSST is a Python library for reading and displaying Swedish Solar Telescope Cubes."
+LONG_DESCRIPTION = "PySST is a Python library for reading and displaying Swedish Solar Telescope Cubes."
 
 # Store the package name in a built-in variable so it's easy
 # to get from other parts of the setup infrastructure

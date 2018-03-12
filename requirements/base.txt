@@ -1,4 +1,4 @@
-# Base dependencies required to run sunkit-sst
+# Base dependencies required to run PySST
 
 numpy
 astropy
