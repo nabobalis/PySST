@@ -1,13 +1,15 @@
 PySST
 ==========
 
-[![Build Status](https://travis-ci.org/nabobalis/pysst.svg?branch=master)](https://travis-ci.org/nabobalis/pysst)
+[![Build Status](https://travis-ci.org/nabobalis/PySST.svg?branch=master)](https://travis-ci.org/nabobalis/PySST)
 [![Documentation Status](http://readthedocs.org/projects/pysst/badge/?version=latest)](http://docs.sunpy.org/projects/pysst/en/latest/?badge=latest)
 
-This is a small Python module that is designed to allow the reading of SST cube files that are created from the Swedish Solar Telescopes.
+This is a small Python module that is designed to allow the reading of SST cube files that are created from the Swedish Solar Telescope (SST).
 This should also work for some IRIS data cubes, as they are also created with this method.
 
 Furthermore, there is a basic matplotlib visualization tool that allows a basic flick through the data and do a slit analysis.
+
+A version made by the people who make the SST can be [found here.](https://github.com/ITA-Solar/helita)
 
 Install
 -------
