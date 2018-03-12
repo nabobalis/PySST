@@ -202,11 +202,15 @@ def read_cubes(imfile, spfile=False, memmap=True, n_wave=None):
         sp_np_dtype = get_dtype(sp_header)
         sp_cube = get_SST_cube(sp, sp_header, sp_np_dtype, memmap=True)
         if 'ns' in im_header.keys():
-            # 4 stoke paramaters
-            target_shape = (np.int(sp_header['ny']), np.int(NUM_STOKES),
-                            np.int(sp_header['nx']), np.int(im_header['ny']),
-                            np.int(im_header['nx']))
-            warnings.warn("Cube is shaped as Time, Stokes, Lambda, X, Y", UserWarning)
+            if im_header['ns']==1:
+                target_shape = (np.int(sp_header['ny']), np.int(sp_header['nx']),
+                                np.int(im_header['ny']), np.int(im_header['nx']))
+            else:
+                # 4 stoke paramaters
+                target_shape = (np.int(sp_header['ny']), np.int(NUM_STOKES),
+                                np.int(sp_header['nx']), np.int(im_header['ny']),
+                                np.int(im_header['nx']))
+                warnings.warn("Cube is shaped as Time, Stokes, Lambda, X, Y", UserWarning)
         else:
             target_shape = (np.int(sp_header['ny']), np.int(sp_header['nx']),
                             np.int(im_header['ny']), np.int(im_header['nx']))
