@@ -3,5 +3,4 @@
 -r base.txt
 
 sphinx
-git+https://github.com/sunpy/sunpy-sphinx-theme.git
-sphinx-gallery
+sunpy-sphinx-theme
