@@ -4,6 +4,8 @@ PySST
 [![Build Status](https://travis-ci.org/nabobalis/PySST.svg?branch=master)](https://travis-ci.org/nabobalis/PySST)
 [![Documentation Status](http://readthedocs.org/projects/pysst/badge/?version=latest)](http://pysst.readthedocs.io/en/latest/?badge=latest)
 
+# **No longer in any active development.**
+
 This is a small Python module that is designed to allow the reading of SST cube files that are created from the Swedish Solar Telescope (SST).
 This should also work for some IRIS data cubes, as they are also created with this method.
 
